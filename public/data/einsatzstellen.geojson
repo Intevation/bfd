@@ -1,0 +1,36 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.75869,
+                    51.21144
+                ]
+            },
+            "properties": {
+                "adresse": "Völlklinger Straße 7-9, 40219 Düsseldorf",
+                "anforderungen": "berufliche Erfahrungen und Kennntissse sind von Vorteil",
+                "ansprechpartner": "Joachim Vorneweg",
+                "anzahl": "fünf",
+                "beginn": "ab sofort",
+                "beschreibung": "in Zusammenarbeit mit hauptamtlichen Kolleg*innen setzen Sie sich für den Naturschutz in unserem Bundesland ein.",
+                "bewerbungschluss": "keiner",
+                "bild": "ja",
+                "email": "bundesfreiwilligendienst@nabu-nrw.de",
+                "ende": "",
+                "name": "NABU NRW",
+                "status": "frei",
+                "taschengeld": "200,- Euro",
+                "teaser": "Ihre Fähigkeiten kommen individuellzum Einsatz in unseren Projekten und der Verbandsarbeit auf Landesebene",
+                "telefon": "0221 15925143",
+                "themen": "Öffentlichkeitsarbeit, Internetauftritt, Print-Materialien, Veranstaltungsplanung und Durchführung",
+                "titel": "Naturschutz in Nordrhein-Westfalen",
+                "unterkunft": "nein",
+                "webseite": "http://www.nabu-nrw.de"
+            }
+        }
+    ]
+}
