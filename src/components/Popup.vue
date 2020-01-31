@@ -3,29 +3,53 @@
     <v-dialog v-model="dialog" persistent max-width="800">
       <v-card>
         <v-container>
-          <v-layout row>
-            <v-flex md6>
-              <v-card-title class="headline" v-if="einsatzstelle.titel">{{einsatzstelle.titel}}</v-card-title>
-              <v-card-subtitle v-if="einsatzstelle.beginn || einsatzstelle.ende">
+          <v-img
+            v-if="bild"
+            :aspect-ratio="4.00/1"
+            :src="einsatzstelle.bild"
+          ></v-img>
+          <v-row align="end" class="lightbox pa-2 fill-height">
+            <v-col>
+              <div class="headline" v-if="einsatzstelle.titel">
+                <strong>{{einsatzstelle.titel}}</strong>
+              </div>
+              <div class="body-1" v-if="einsatzstelle.beginn || einsatzstelle.ende">
                 {{einsatzstelle.beginn}}
                 <div
                   style="display:inline-block"
                   v-if="einsatzstelle.ende"
                 >bis {{einsatzstelle.ende}}</div>
-              </v-card-subtitle>
+              </div>
+            </v-col>
+          </v-row>
+          <v-layout row>
+            <v-flex md6>
+              <v-card-text v-if="einsatzstelle.themen">
+                <strong>Themen</strong>
+                <br />
+                {{einsatzstelle.themen}}
+              </v-card-text>
 
               <v-card-text
                 v-if="einsatzstelle.taschengeld || einsatzstelle.anzahl || einsatzstelle.bewerbungsschluss"
               >
-                <strong>Eckdaten:</strong>
+                <strong>Eckdaten</strong>
                 <ul>
                   <li v-if="einsatzstelle.anzahl">
                     Anzahl Plätze:
                     <strong>{{einsatzstelle.anzahl}}</strong>
                   </li>
+                  <li v-if="einsatzstelle.anforderungen">
+                    Anforderungen:
+                    <strong>{{einsatzstelle.anforderungen}}</strong>
+                  </li>
                   <li v-if="einsatzstelle.taschengeld">
                     Taschengeld:
                     <strong>{{einsatzstelle.taschengeld}}</strong>
+                  </li>
+                  <li v-if="einsatzstelle.unterkunft">
+                    Unterkunft:
+                    <strong>{{einsatzstelle.unterkunft}}</strong>
                   </li>
                   <li v-if="einsatzstelle.bewerbungsschluss">
                     Bewerbungsschluss:
@@ -35,12 +59,14 @@
               </v-card-text>
 
               <v-card-text v-if="einsatzstelle.teaser">
-                <strong>Teaser:</strong>
+                <strong>Kurzbeschreibung</strong>
+                <br />
                 {{einsatzstelle.teaser}}
               </v-card-text>
 
               <v-card-text v-if="einsatzstelle.beschreibung">
-                <strong>Beschreibung:</strong>
+                <strong>Beschreibung</strong>
+                <br />
                 {{einsatzstelle.beschreibung}}
               </v-card-text>
             </v-flex>
@@ -137,8 +163,7 @@
         </v-container>
 
         <v-card-actions class="justify-center">
-          <v-btn small outlined color="#0068b4" @click="schliessen">Schließen!</v-btn>
-          <v-btn small color="#0068b4" dark @click="klick">Mehr erfahren!</v-btn>
+          <v-btn small color="#0068b4" dark @click="schliessen">Schließen</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -154,6 +179,17 @@
 <script>
 export default {
   props: { dialog: Boolean, einsatzstelle: Object },
+  computed: {
+    bild: function() {
+      var pattern = new RegExp("^(https?|ftp)://");
+      var bild = "";
+
+      if (pattern.test(this.einsatzstelle.bild)) {
+        bild = this.einsatzstelle.bild;
+      }
+      return bild;
+    }
+  },
   methods: {
     schliessen() {
       this.$emit("update:dialog", !this.dialog);
