@@ -75,6 +75,22 @@ export default {
   }),
   created() {
     this.fetchData(this.url);
+    fetch("data/bundeslaender.geojson")
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        L.geoJSON(data, {
+          style: {
+            stroke: true,
+            color: "grey",
+            weight: 1,
+            opacity: 1,
+            fillColor: "white",
+          }
+        }).addTo(this.map);
+      });
   },
   mounted() {
     this.map = L.map("map", {
