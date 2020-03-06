@@ -80,7 +80,6 @@ export default {
         return response.json();
       })
       .then(data => {
-        console.log(data);
         L.geoJSON(data, {
           style: {
             stroke: true,
@@ -257,7 +256,6 @@ export default {
       };
     },
     klick(layer) {
-      console.log(layer);
       this.einsatzstelle = layer.feature.properties;
       this.dialog = true;
     }
