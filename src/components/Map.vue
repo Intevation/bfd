@@ -9,6 +9,8 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Popup from "./Popup";
 import germany from "./germany";
+import "leaflet.markercluster";
+import "leaflet.markercluster/dist/MarkerCluster.css";
 
 //https://github.com/KoRiGaN/Vue2Leaflet/issues/28
 
@@ -24,9 +26,11 @@ export default {
   components: { Popup },
   props: {},
   data: () => ({
-    url: "data/einsatzstellen.geojson",
+    url: "data/EinsatzstellenKartenanwendung.geojson",
     einsatzstellen: {},
     einsatzstelle: {},
+    einsatzstellen_besetzt: {},
+    einsatzstellen_unklar: {},
     dialog: false,
     map: {},
     //https://github.com/esri/esri-leaflet#terms
@@ -136,10 +140,96 @@ export default {
           return response.json();
         })
         .then(data => {
-          this.einsatzstellen = L.geoJSON(data, {
-            onEachFeature: this.onEachFeatureClosure()
+          var greenIcon = new L.Icon({
+            iconUrl: "img/marker-icon-green.png",
+            shadowUrl: "img/marker-shadow.png",
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
           });
-          this.map.addLayer(this.einsatzstellen);
+          var redIcon = new L.Icon({
+            iconUrl: "img/marker-icon-red.png",
+            shadowUrl: "img/marker-shadow.png",
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          });
+          var greyIcon = new L.Icon({
+            iconUrl: "img/marker-icon-grey.png",
+            shadowUrl: "img/marker-shadow.png",
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          });
+          this.einsatzstellen = L.geoJSON(data, {
+            onEachFeature: this.onEachFeatureClosure(),
+            //filter: function(feature, layer)
+            filter: function(feature) {
+              return feature.properties.status == "frei";
+            },
+            pointToLayer: function(feature, latlng) {
+              return L.marker(latlng, {
+                icon: greenIcon
+              }).on("mouseover", function() {
+                this.bindPopup(feature.properties.name).openPopup();
+              });
+            }
+          });
+          this.einsatzstellen_besetzt = L.geoJSON(data, {
+            onEachFeature: this.onEachFeatureClosure(),
+            //filter: function(feature, layer)
+            filter: function(feature) {
+              return feature.properties.status == "besetzt";
+            },
+            pointToLayer: function(feature, latlng) {
+              return L.marker(latlng, {
+                icon: redIcon
+              }).on("mouseover", function() {
+                this.bindPopup(feature.properties.name).openPopup();
+              });
+            }
+          });
+          this.einsatzstellen_unklar = L.geoJSON(data, {
+            onEachFeature: this.onEachFeatureClosure(),
+            //filter: function(feature, layer)
+            filter: function(feature) {
+              return (feature.properties.status !== "frei") | "besetzt";
+            },
+            pointToLayer: function(feature, latlng) {
+              return L.marker(latlng, {
+                icon: greyIcon
+              }).on("mouseover", function() {
+                this.bindPopup(feature.properties.name).openPopup();
+              });
+            }
+          });
+
+          var markers = L.markerClusterGroup({
+            showCoverageOnHover: false,
+            maxClusterRadius: 25,
+            iconCreateFunction: function(cluster) {
+              return L.divIcon({
+                html:
+                  '<div class="divIconCluster"></div><div class="myMarkerCluster">' +
+                  cluster.getChildCount() +
+                  "</div>",
+                iconSize: [32, 37],
+                className: ""
+              });
+            }
+          });
+
+          markers.addLayer(this.einsatzstellen);
+          markers.addLayer(this.einsatzstellen_besetzt);
+          markers.addLayer(this.einsatzstellen_unklar);
+          this.map.addLayer(markers);
+
+          //this.map.addLayer(this.einsatzstellen);
+          //this.map.addLayer(this.einsatzstellen_besetzt);
+          //this.map.addLayer(this.einsatzstellen_unklar);
         });
     },
     onEachFeatureClosure() {
@@ -152,7 +242,7 @@ export default {
     },
     klick(layer) {
       console.log(layer);
-      this.einsatzstelle=layer.feature.properties;
+      this.einsatzstelle = layer.feature.properties;
       this.dialog = true;
     }
   }
@@ -164,5 +254,26 @@ export default {
   width: 100% !important;
   height: 100% !important;
   z-index: 9999;
+}
+
+.myMarkerCluster {
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: darkslategrey;
+  color: white;
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  font-weight: bold;
+  text-align: center;
+}
+
+.divIconCluster {
+  width: 25px;
+  height: 41px;
+  line-height: 41px;
+  background-image: url("../../public/img/marker-icon-blue.png");
+  text-align: center;
 }
 </style>
