@@ -1,6 +1,8 @@
 <template>
   <div id="map">
-    <Popup :dialog.sync="dialog" :einsatzstelle="einsatzstelle"></Popup>
+    <Popup
+      :dialog.sync="dialog"
+      :einsatzstelle="einsatzstelle" />
   </div>
 </template>
 
