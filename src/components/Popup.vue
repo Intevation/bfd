@@ -204,7 +204,6 @@ export default {
     bild: function() {
       var pattern = new RegExp("^(https?|ftp)://");
       var bild = "";
-      console.log(this.einsatzstelle.bild)
 
       if (pattern.test(this.einsatzstelle.bild)) {
         bild = this.einsatzstelle.bild;
