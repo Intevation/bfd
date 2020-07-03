@@ -213,7 +213,7 @@ export default {
             onEachFeature: this.onEachFeatureClosure(),
             //filter: function(feature, layer)
             filter: function(feature) {
-              return (feature.properties.status !== "frei") | "besetzt";
+              return (!(feature.properties.status == "frei") && !(feature.properties.status == "besetzt"));
             },
             pointToLayer: function(feature, latlng) {
               return L.marker(latlng, {
