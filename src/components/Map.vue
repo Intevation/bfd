@@ -45,7 +45,7 @@ export default {
       }
     ),
     osm: new L.TileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      minZoom: 6,
+      minZoom: 5,
       maxZoom: 18,
       attribution:
         'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, '+process.env.VUE_APP_GIT_HASH
@@ -55,6 +55,7 @@ export default {
       {
         attribution:
           'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>, '+process.env.VUE_APP_GIT_HASH,
+        minZoom: 5,
         maxZoom: 18,
         id: "mapbox.streets",
         accessToken:
@@ -96,10 +97,10 @@ export default {
   mounted() {
     this.map = L.map("map", {
       attributionControl: false,
-      center: [51, 13],
-      zoom: 6,
+      center: (L.Browser.mobile ? [51,10]:[51, 13]),
+      zoom: (L.Browser.mobile ? 5 : 6),
       maxZoom: 18,
-      minZoom: 6,
+      minZoom: (L.Browser.mobile ? 5 : 6),
       //maxBounds: [[42, -46], [58, 67]],
       //maxBounds: [[0, -180], [0, 180]],
       fadeAnimation: false,
