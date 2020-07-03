@@ -99,8 +99,8 @@
                       </v-icon>
                     </v-list-item-icon>
 
-                    <v-list-item-content>
-                      <v-list-item-title>{{ einsatzstelle.name }}</v-list-item-title>
+                    <v-list-item-content class="special-item-content">
+                      {{ einsatzstelle.name }}
                     </v-list-item-content>
                   </v-list-item>
 
@@ -111,8 +111,8 @@
                       </v-icon>
                     </v-list-item-icon>
 
-                    <v-list-item-content>
-                      <v-list-item-title>{{ einsatzstelle.adresse }}</v-list-item-title>
+                    <v-list-item-content class="special-item-content">
+                      {{ einsatzstelle.adresse }}
                     </v-list-item-content>
                   </v-list-item>
 
@@ -123,12 +123,10 @@
                       </v-icon>
                     </v-list-item-icon>
 
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        <a
-                          :href="einsatzstelle.webseite"
-                          target="_blank">{{ einsatzstelle.webseite }}</a>
-                      </v-list-item-title>
+                    <v-list-item-content class="special-item-content">
+                      <a
+                        :href="einsatzstelle.webseite"
+                        target="_blank">{{ einsatzstelle.webseite }}</a>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -144,8 +142,8 @@
                       </v-icon>
                     </v-list-item-icon>
 
-                    <v-list-item-content>
-                      <v-list-item-title>{{ einsatzstelle.ansprechpartner }}</v-list-item-title>
+                    <v-list-item-content class="special-item-content">
+                      {{ einsatzstelle.ansprechpartner }}
                     </v-list-item-content>
                   </v-list-item>
 
@@ -156,12 +154,10 @@
                       </v-icon>
                     </v-list-item-icon>
 
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        <a
-                          :href="'tel:'+einsatzstelle.telefon"
-                          target="_blank">{{ einsatzstelle.telefon }}</a>
-                      </v-list-item-title>
+                    <v-list-item-content class="special-item-content">
+                      <a
+                        :href="'tel:'+einsatzstelle.telefon"
+                        target="_blank">{{ einsatzstelle.telefon }}</a>
                     </v-list-item-content>
                   </v-list-item>
 
@@ -172,12 +168,10 @@
                       </v-icon>
                     </v-list-item-icon>
 
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        <a
-                          :href="'mailto:'+einsatzstelle.email"
-                          target="_blank">{{ einsatzstelle.email }}</a>
-                      </v-list-item-title>
+                    <v-list-item-content class="special-item-content">
+                      <a
+                        :href="'mailto:'+einsatzstelle.email"
+                        target="_blank">{{ einsatzstelle.email }}</a>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -203,6 +197,10 @@
 <style>
 .headline {
   word-break: normal !important;
+}
+.special-item-content{
+  font-weight: 500;
+  font-size: 0.8125rem;
 }
 </style>
 
