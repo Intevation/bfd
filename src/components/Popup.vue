@@ -1,45 +1,43 @@
 <template>
-  <v-row justify="center">
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="800">
-      <v-card>
+  <v-dialog
+    v-model="dialog"
+    persistent
+    max-width="800">
+    <v-card class="overflow-hidden">
+      <v-app-bar
+        dark
+        color="primary">
+        <v-toolbar-title
+          v-if="einsatzstelle.titel"
+          class="headline">
+          <strong>{{ einsatzstelle.titel }}</strong>
+          <div
+            v-if="einsatzstelle.beginn || einsatzstelle.ende"
+            class="body-1">
+            {{ einsatzstelle.beginn }}
+            <div
+              v-if="einsatzstelle.ende"
+              style="display:inline-block">
+              bis {{ einsatzstelle.ende }}
+            </div>
+          </div>
+        </v-toolbar-title>
+        <v-spacer />
+        <v-btn
+          icon
+          small
+          @click="schliessen">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-app-bar>
+      <v-sheet
+        class="overflow-y-auto"
+        max-height="600">
         <v-container>
           <v-img
             v-if="bild"
             :aspect-ratio="4.00/1"
             :src="einsatzstelle.bild" />
-          <v-row>
-            <v-col cols="11">
-              <div
-                v-if="einsatzstelle.titel"
-                class="headline">
-                <strong>{{ einsatzstelle.titel }}</strong>
-              </div>
-              <div
-                v-if="einsatzstelle.beginn || einsatzstelle.ende"
-                class="body-1">
-                {{ einsatzstelle.beginn }}
-                <div
-                  v-if="einsatzstelle.ende"
-                  style="display:inline-block">
-                  bis {{ einsatzstelle.ende }}
-                </div>
-              </div>
-            </v-col>
-            <v-col
-              cols="1">
-              <v-btn
-                fab
-                dark
-                color="primary"
-                small
-                @click="schliessen">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-col>
-          </v-row>
           <v-layout row>
             <v-flex md6>
               <v-card-text v-if="einsatzstelle.themen">
@@ -179,19 +177,9 @@
             </v-flex>
           </v-layout>
         </v-container>
-
-        <v-card-actions class="justify-center">
-          <v-btn
-            small
-            color="#0068b4"
-            dark
-            @click="schliessen">
-            Schließen
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-row>
+      </v-sheet>
+    </v-card>
+  </v-dialog>
 </template>
 
 <style>
