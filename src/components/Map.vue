@@ -159,27 +159,21 @@ export default {
         .then(data => {
           var greenIcon = new L.Icon({
             iconUrl: "img/marker-icon-green.png",
-            shadowUrl: "img/marker-shadow.png",
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
-            shadowSize: [41, 41]
           });
           var redIcon = new L.Icon({
             iconUrl: "img/marker-icon-red.png",
-            shadowUrl: "img/marker-shadow.png",
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
-            shadowSize: [41, 41]
           });
           var greyIcon = new L.Icon({
             iconUrl: "img/marker-icon-grey.png",
-            shadowUrl: "img/marker-shadow.png",
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
-            shadowSize: [41, 41]
           });
           this.einsatzstellen = L.geoJSON(data, {
             onEachFeature: this.onEachFeatureClosure(),
