@@ -10,10 +10,8 @@
             v-if="bild"
             :aspect-ratio="4.00/1"
             :src="einsatzstelle.bild" />
-          <v-row
-            align="end"
-            class="lightbox pa-2 fill-height">
-            <v-col>
+          <v-row>
+            <v-col cols="11">
               <div
                 v-if="einsatzstelle.titel"
                 class="headline">
@@ -29,6 +27,17 @@
                   bis {{ einsatzstelle.ende }}
                 </div>
               </div>
+            </v-col>
+            <v-col
+              cols="1">
+              <v-btn
+                fab
+                dark
+                color="primary"
+                small
+                @click="schliessen">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
             </v-col>
           </v-row>
           <v-layout row>
