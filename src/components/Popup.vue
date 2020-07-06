@@ -2,9 +2,8 @@
   <v-dialog
     v-model="dialog"
     persistent
-    max-width="800"
-    class="overflow-hidden">
-    <v-card class="overflow-hidden">
+    max-width="800">
+    <v-card>
       <v-app-bar
         flat
         color="white">
@@ -188,6 +187,10 @@
 </template>
 
 <style>
+.v-dialog--active{
+    overflow: hidden !important;
+}
+
 .headline {
   white-space: normal !important;
 }
