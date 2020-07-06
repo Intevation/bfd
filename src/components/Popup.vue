@@ -11,16 +11,6 @@
           v-if="einsatzstelle.titel"
           class="headline">
           <strong>{{ einsatzstelle.titel }}</strong>
-          <div
-            v-if="einsatzstelle.beginn || einsatzstelle.ende"
-            class="body-1">
-            {{ einsatzstelle.beginn }}
-            <div
-              v-if="einsatzstelle.ende"
-              style="display:inline-block">
-              bis {{ einsatzstelle.ende }}
-            </div>
-          </div>
         </v-toolbar-title>
         <v-spacer />
         <v-btn
@@ -40,6 +30,17 @@
             :src="einsatzstelle.bild" />
           <v-layout row>
             <v-flex md6>
+              <v-card-text
+                v-if="einsatzstelle.beginn || einsatzstelle.ende">
+                <strong>Termine</strong>
+                <br>
+                {{ einsatzstelle.beginn }}
+                <div
+                  v-if="einsatzstelle.ende"
+                  style="display:inline-block">
+                  bis {{ einsatzstelle.ende }}
+                </div>
+              </v-card-text>
               <v-card-text v-if="einsatzstelle.themen">
                 <strong>Themen</strong>
                 <br>
@@ -184,7 +185,7 @@
 
 <style>
 .headline {
-  word-break: normal !important;
+  white-space: normal !important;
 }
 .special-item-content{
   font-weight: 500;
