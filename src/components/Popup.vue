@@ -2,7 +2,8 @@
   <v-dialog
     v-model="dialog"
     persistent
-    max-width="800">
+    max-width="800"
+    class="overflow-hidden">
     <v-card class="overflow-hidden">
       <v-app-bar
         flat
