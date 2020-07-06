@@ -5,8 +5,8 @@
     max-width="800">
     <v-card class="overflow-hidden">
       <v-app-bar
-        dark
-        color="primary">
+        flat
+        color="white">
         <v-toolbar-title
           v-if="einsatzstelle.titel"
           class="headline">
@@ -14,7 +14,10 @@
         </v-toolbar-title>
         <v-spacer />
         <v-btn
+          fab
           icon
+          dark
+          color="primary"
           small
           @click="schliessen">
           <v-icon>mdi-close</v-icon>
