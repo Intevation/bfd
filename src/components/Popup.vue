@@ -2,6 +2,7 @@
   <v-dialog
     v-model="dialog"
     persistent
+    scrollable
     max-width="800">
     <v-card>
       <v-app-bar
