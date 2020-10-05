@@ -52,19 +52,6 @@ export default {
       attribution:
         'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, ' + process.env.VUE_APP_GIT_HASH
     }),
-    streetmap: L.tileLayer(
-      "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
-      {
-        attribution:
-          'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>, ' + process.env.VUE_APP_GIT_HASH,
-        minZoom: 5,
-        maxZoom: 18,
-        id: "mapbox.streets",
-        accessToken:
-          "pk.eyJ1IjoiYmpvZXJuc2NoaWxiZXJnIiwiYSI6InRzOVZKeWsifQ.y20mr9o3MolFOUdTQekhUA",
-        noWrap: true
-      }
-    ),
     satellite: L.tileLayer.wms("https://tiles.maps.eox.at/?", {
       layers: "s2cloudless_3857",
       attribution:
