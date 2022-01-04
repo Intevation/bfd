@@ -75,6 +75,7 @@ export default {
       doubleClickZoom: false
       // renderer: L.canvas()
     });
+    this.map.fitBounds([[47.2, 5.8], [55, 15.1]], {animate: false}),
 
     this.map.addControl(
       L.control.attribution({
