@@ -30,7 +30,7 @@ export default {
   components: { Popup },
   props: {},
   data: () => ({
-    url: "https://mapserver.nabu.de/owncloud/index.php/s/uFl8IoMeHsQGhND/download",
+    url: "https://cloud.nabu.de/remote.php/dav/public-files/hmYCHqQjlufUNwY/EinsatzstellenKartenanwendungComputer.xlsx",
     einsatzstellen: {},
     einsatzstelle: {},
     einsatzstellen_besetzt: {},
